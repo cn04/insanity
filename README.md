@@ -6,7 +6,7 @@ The simple, no-nonsense machine learning library for Python, intended to be a mi
 * Can be run on a CPU or an NVIDIA GPU using CUDA.
 
 ##Portable
-* Supports embedded ARM-based systems such as NVIDIA's [Jetson TK1](http://elinux.org/Jetson_TK1).
+* Supports embedded ARM-based systems such as NVIDIA's [Jetson TK1](http://elinux.org/Jetson_TK1), in addition to traditional x86-64 processors and desktop GPUs.
 
 ##Powerful
 * Provides an API for neural networks with several layer types.
