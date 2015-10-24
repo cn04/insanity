@@ -21,4 +21,4 @@ class NeuralNetwork(object):
 		for i in xrange(1, self.numLayers):
 			nextLayer = layers[i]
 			previousLayer = layers[i-1]
-			nextLayer.input = previousLayer.output
+			nextLayer.configureInput(previousLayer.output, previousLayer.outputDropout, self.miniBatchSize)
