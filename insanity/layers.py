@@ -12,26 +12,24 @@ class FullyConnectedLayer(object):
 	def __init__(self, previousLayer, numNeurons, activation, miniBatchSize, dropout=0.0):
 		self.numNeurons = numNeurons
 		self.activation = activation
-		self.miniBatchSize = miniBatchSize
 		self.dropout = dropout
+		
 		#Initialize weights and biases.
 		self.weights = theano.shared(
             np.asarray(
                 np.random.normal(
-                    loc=0.0, scale=np.sqrt(1.0/n_out), size=(connectionsIn, connectionsOut)),
+                    loc=0.0, scale=np.sqrt(1.0/n_out), size=(previousLayer.numNeurons, self.numNeurons)),
                 dtype=theano.config.floatX),
             name='weights', borrow=True)
         self.biases = theano.shared(
-            np.asarray(np.random.normal(loc=0.0, scale=1.0, size=(connectionsOut,)),
+            np.asarray(np.random.normal(loc=0.0, scale=1.0, size=(self.numNeurons,)),
                        dtype=theano.config.floatX),
             name='biases', borrow=True)
-		#Store weights and biases in self.learningParams so they can be found by NeuralNetwork.
+            
         self.learningParams = [self.weights, self.biases]
-		
-	def configureInput(self, input, inputDropout, miniBatchSize):
-		self.input = input.reshape((miniBatchSize, self.connectionsIn))
-		self.inputDropout = dropoutLayer(inputDropout.reshape((miniBatchSize, self.connectionsIn)), self.dropout)
-		#Set non-dropout output
-		self.output = self.activation((1-self.dropout)*T.dot(self.input, self.weights) + self.biases)
-		#Set dropout output
-		
+        
+        #Configure layer processing procedure.
+        something = previousLayer.output
+        somethingElse = previousLayer.outputDropout
+        self.output = 0
+        self.outputDropout = 0
