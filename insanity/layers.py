@@ -9,12 +9,10 @@ from theano.tensor.signal import downsample
 
 class FullyConnectedLayer(object):
 
-	def __init__(self, connectionsIn, connectionsOut, activation, dropout=0.0):
-		self.miniBatchSize
-		#Initialize connection counts, activation function, and dropout parameter.
-		self.connectionsIn = connectionsIn
-		self.connectionsOut = connectionsOut
+	def __init__(self, previousLayer, numNeurons, activation, miniBatchSize, dropout=0.0):
+		self.numNeurons = numNeurons
 		self.activation = activation
+		self.miniBatchSize = miniBatchSize
 		self.dropout = dropout
 		#Initialize weights and biases.
 		self.weights = theano.shared(
