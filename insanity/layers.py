@@ -28,8 +28,10 @@ class FullyConnectedLayer(object):
             
         self.learningParams = [self.weights, self.biases]
         
-        #Configure layer processing procedure.
-        something = previousLayer.output
-        somethingElse = previousLayer.outputDropout
-        self.output = 0
-        self.outputDropout = 0
+        #Configure non-dropout processing.
+        self.input = previousLayer.output.reshape((miniBatchSize, previousLayer.numNeurons))
+        self.output = self.activation((1-self.dropout)*T.dot(self.input, self.weights) + self.biases)
+        
+        #Configure dropout processing.
+        self.inputDropout = dropoutLayer(inptDropout.reshape((miniBatchSize, previousLayer.numNeurons)), self.dropout)
+        self.outputDropout = self.activation(T.dot(self.inputDropout, self.weights) + self.biases)
