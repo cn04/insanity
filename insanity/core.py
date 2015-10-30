@@ -3,6 +3,7 @@ import theano
 import theano.tensor as T
 
 
+
 class NeuralNetwork(object):
 
     def __init__(self, layers, miniBatchSize):
