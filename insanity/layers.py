@@ -10,10 +10,11 @@ from theano.tensor.signal import downsample
 
 class Layer(object):
 
-	def __init__(self, numInputs, numNeurons, activation):
+	def __init__(self, numInputs, numNeurons, activation, miniBatchSize):
 		self.numInputs = numInputs
 		self.numNeurons = numNeurons
 		self.activation = activation
+		self.miniBatchSize = miniBatchSize
 		
 		#Initialize weights.
 		self.weights = theano.shared(
@@ -31,8 +32,9 @@ class Layer(object):
 				dtype=theano.config.floatX),
             name='biases', borrow=True)
         
-    @property
-    def input(value):
+    @input.setter
+    def input(self, value):
+		self.input = value
 		#Configure the layer output.
 		self.output = something
 
@@ -40,5 +42,8 @@ class Layer(object):
 
 class FullyConnectedLayer(Layer):
 	
-	
-		
+	@Layer.input.setter
+	def input(self, value):
+		self.input = value
+		#Configure the layer output.
+		self.output = something
