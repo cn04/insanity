@@ -1,19 +1,16 @@
 import numpy as np
 import theano
 import theano.tensor as T
-from theano.tensor.nnet import conv
-from theano.tensor.nnet import softmax
-from theano.tensor import shared_randomstreams
-from theano.tensor.signal import downsample
 
 
 
-class Layer(object):
+class NetworkLayer(object):
 
-	def __init__(self, numInputs, numNeurons, activation, miniBatchSize):
+	def __init__(self, numInputs, numNeurons, activation, miniBatchSize, dropout=0.0):
 		self.numInputs = numInputs
 		self.numNeurons = numNeurons
 		self.activation = activation
+		self.dropout = dropout
 		self.miniBatchSize = miniBatchSize
 		
 		#Initialize weights.
@@ -34,16 +31,18 @@ class Layer(object):
         
     @input.setter
     def input(self, value):
+		#This is overrided by subclasses to add layer functionality.
 		self.input = value
-		#Configure the layer output.
-		self.output = something
+		self.output = value
 
 
 
-class FullyConnectedLayer(Layer):
+class FullyConnectedLayer(NetworkLayer):
 	
-	@Layer.input.setter
+	@NetworkLayer.input.setter
 	def input(self, value):
 		self.input = value
-		#Configure the layer output.
-		self.output = something
+		#Configure the layer's complete neuron inputs.
+		neuronInputs = value.reshape((self.miniBatchSize, self.numInputs))
+		#Perform the main weight-bias layer output computation.
+		self.output = self.activation((1 - self.dropout) * T.dot(neuronInputs, self.weights) + self.biases)
