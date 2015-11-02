@@ -4,11 +4,11 @@ Insanity is licensed under [Creative Commons Zero.](https://creativecommons.org/
 <br>
 
 ##Powerful
-* Provides an API for neural networks with several layer types.
+* Provides an API for neural networks with several layer types:
   * Fully-connected
   * Convolutional
   * Max-pooling
-* Provides several neuron activation functions.
+* Provides several neuron activation functions:
   * Linear
   * Sigmoid
   * Tanh
@@ -22,7 +22,7 @@ Insanity is licensed under [Creative Commons Zero.](https://creativecommons.org/
 * Can be accelerated using CUDA or OpenCL.
 
 ##Portable
-* Can run on any computing platform.
+* Can run on any computing platform:
  * Traditional CPUs
  * NVIDIA GPUs using CUDA
  * Other processing units using OpenCL
