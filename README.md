@@ -1,5 +1,5 @@
 # insanity
-The simple, no-nonsense machine learning library for Python, intended to be a minimal alternative to libraries such as Caffe and Torch7.  
+The simple, minimal deep learning library for Python, intended to be an alternative to libraries such as Caffe and Torch7.  
 Insanity is licensed under [Creative Commons Zero.](https://creativecommons.org/publicdomain/zero/1.0/)
 <br>
 
