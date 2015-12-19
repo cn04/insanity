@@ -15,25 +15,31 @@ class NetworkLayer(object):
 		
 		#Initialize weights.
 		self.weights = theano.shared(
-            np.asarray(
-                np.random.normal(
-                    loc=0.0, scale=np.sqrt(1.0/self.numNeurons), size=(self.numInputs, self.numNeurons)),
-                dtype=theano.config.floatX),
-            name='weights', borrow=True)
+            		np.asarray(
+                		np.random.normal(
+                			loc=0.0, scale=np.sqrt(1.0/self.numNeurons), size=(self.numInputs, self.numNeurons)),
+                	dtype=theano.config.floatX),
+            	name='weights', borrow=True)
             
-        #Initialize biases.
-        self.biases = theano.shared(
-            np.asarray(
+        	#Initialize biases.
+        	self.biases = theano.shared(
+            		np.asarray(
 				np.random.normal(
 					loc=0.0, scale=1.0, size=(self.numNeurons,)),
 				dtype=theano.config.floatX),
-            name='biases', borrow=True)
+            	name='biases', borrow=True)
         
-    @input.setter
-    def input(self, value):
-		#This is overrided by subclasses to add layer functionality.
+        #These are overrided by subclasses to add layer functionality. 
+        
+	@input.setter
+	def input(self, value):
 		self.input = value
 		self.output = value
+		
+    	@inputDropout.setter
+    	def inputDropout(self, value):
+    		self.inputDropout = value
+    		self.outputDropout = value
 
 
 
